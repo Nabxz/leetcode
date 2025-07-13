@@ -3,7 +3,7 @@ package Arrays_and_Hashing;
 import java.util.HashMap;
 
 /*
- * Time Complexity: O(n + m), where n is the length of the string s and m is the length of the string t
+ * Time Complexity: O(2n + m), where n is the length of the string s and m is the length of the string t
  * Space Complexity: O(1)
  */
 
