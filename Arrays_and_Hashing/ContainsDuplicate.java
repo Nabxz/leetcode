@@ -3,9 +3,9 @@ package Arrays_and_Hashing;
 import java.util.HashSet;
 
 /*
- * Time Complexity: O(n)
- * Space Complexity: O(n)
- */
+* Time Complexity: O(n)
+* Space Complexity: O(n)
+*/
 
 public class ContainsDuplicate {
     public boolean hasDuplicate(int[] nums) {
