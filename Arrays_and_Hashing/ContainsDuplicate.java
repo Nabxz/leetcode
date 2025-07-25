@@ -8,7 +8,7 @@ import java.util.HashSet;
 */
 
 public class ContainsDuplicate {
-    public boolean hasDuplicate(int[] nums) {
+    public static boolean hasDuplicate(int[] nums) {
 
         HashSet<Integer> myHash = new HashSet<>();
         for (int i = 0; i < nums.length; i++) {
@@ -20,5 +20,12 @@ public class ContainsDuplicate {
         }
 
         return false;
+    }
+
+    public static void main(String[] args) {
+        int[] test = {25, 25, 100};
+        System.out.println("Test 1:\nExpected: true\nResult: " + hasDuplicate(test));
+        int[] test2 = {25, 125, 100};
+        System.out.println("\nTest 2:\nExpected: false\nResult: " + hasDuplicate(test2));
     }
 }

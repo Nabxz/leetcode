@@ -8,7 +8,7 @@ package Arrays_and_Hashing;
 import java.util.HashMap;
 
 public class TwoSum {
-    public int[] twoSum(int[] nums, int target) {
+    public static int[] twoSum(int[] nums, int target) {
         
         boolean sumsFound = false;
         int[] indices = new int[2];
@@ -32,5 +32,12 @@ public class TwoSum {
         }
 
         return indices;
+    }
+
+    public static void main(String[] args) {
+        
+        int[] test = {3,4,5,6};
+        int[] result = twoSum(test, 7);
+        System.out.println("Expected: [0,1]\nResult: [" + result[0] + "," + result[1] + "]");
     }
 }

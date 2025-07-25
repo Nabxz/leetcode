@@ -8,7 +8,7 @@ import java.util.HashMap;
 */
 
 public class ValidAnagram {
-    public boolean isAnagram(String s, String t) {
+    public static boolean isAnagram(String s, String t) {
 
         boolean validAnagram = false;
         if (s.length() == t.length()) {
@@ -48,5 +48,10 @@ public class ValidAnagram {
         }
 
         return validAnagram;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Test 1:\nExpected: true\nActual: " + isAnagram("tab", "bat"));
+        System.out.println("\nTest 2:\nExpected: false\nActual: " + isAnagram("cat", "bat"));
     }
 }
