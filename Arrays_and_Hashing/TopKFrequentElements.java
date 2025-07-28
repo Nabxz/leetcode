@@ -1,3 +1,5 @@
+package Arrays_and_Hashing;
+
 /*
 * Time Complexity: O(n), where n is the size of the input array
 * Space Complexity: O(n)
@@ -22,21 +24,18 @@ public class TopKFrequentElements {
             }
         }
 
-        // We use the frequency of each number as the key of the TreeMap which is sorted in descending order and
-        // the values are the number it self
-        TreeMap<Integer, Integer> orderedFrequencyMap = new TreeMap<>(Collections.reverseOrder());
-        for(int number : frequencyMap.keySet()) {
-            orderedFrequencyMap.put(frequencyMap.get(number), number);
+        System.out.println(frequencyMap);
+
+        int[] arrayOfFrequency = new int[frequencyMap.values().size()];
+
+        for(int i = 0; i < frequencyMap.values().size(); i++){
+            arrayOfFrequency[i] = frequencyMap.get(nums[i]);
+            System.out.println(arrayOfFrequency[i]);
         }
 
-        // We add our numbers back to our array
-        int i = 0;
-        for(int frequency : orderedFrequencyMap.keySet()) {
-            if (i < topKFrequent.length) {
-                topKFrequent[i] = orderedFrequencyMap.get(frequency);
-                i++;
-            }
-        }
+        // Now that we have an array of the frequencies we sort that
+        int[] sortedArrayOfFrequency = new int[frequencyMap.values().size()];
+        
 
         return topKFrequent;
     }
