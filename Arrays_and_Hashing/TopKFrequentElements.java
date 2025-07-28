@@ -4,10 +4,7 @@ package Arrays_and_Hashing;
 * Time Complexity: O(n), where n is the size of the input array
 * Space Complexity: O(n)
 */
-
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.TreeMap;
 
 public class TopKFrequentElements {
     public static int[] topKFrequent(int[] nums, int k) {
