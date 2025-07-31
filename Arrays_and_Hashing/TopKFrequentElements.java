@@ -1,5 +1,6 @@
 package Arrays_and_Hashing;
 
+import java.util.ArrayList;
 /*
 * Time Complexity: O(n), where n is the size of the input array
 * Space Complexity: O(n)
@@ -21,18 +22,36 @@ public class TopKFrequentElements {
             }
         }
 
-        System.out.println(frequencyMap);
+        // Using bucket sort, for each frequency possible we store which values have that frequency
+        // Note the highest possible frequency is our arrays length
+        // Each bucket represents the frequency and inside we have an array list of which values have
+        // that frequency
 
-        int[] arrayOfFrequency = new int[frequencyMap.values().size()];
+        ArrayList<Integer>[] frequencyBucket = new ArrayList[nums.length + 1];
 
-        for(int i = 0; i < frequencyMap.values().size(); i++){
-            arrayOfFrequency[i] = frequencyMap.get(nums[i]);
-            System.out.println(arrayOfFrequency[i]);
+        // Storing the values in their frequency bucket
+        for(int value : frequencyMap.keySet()) {
+
+            // If this is the first time we are initializing it then we must set up the arraylist
+            if (frequencyBucket[frequencyMap.get(value)] == null) {
+                frequencyBucket[frequencyMap.get(value)] = new ArrayList<Integer>();
+            }
+
+            frequencyBucket[frequencyMap.get(value)].add(value);
         }
-
-        // Now that we have an array of the frequencies we sort that
-        int[] sortedArrayOfFrequency = new int[frequencyMap.values().size()];
         
+        // We iterate backward on our frequency buckets picking the top k frequent values
+        // and return them
+        int currentTopFrequentFound = 0;
+        for(int i = frequencyBucket.length - 1; i > 0 && currentTopFrequentFound < k; i--){
+
+            if(frequencyBucket[i] != null) {
+                for(int value : frequencyBucket[i]) {
+                    topKFrequent[currentTopFrequentFound] = value;
+                    currentTopFrequentFound++;
+                }
+            }
+        }
 
         return topKFrequent;
     }
