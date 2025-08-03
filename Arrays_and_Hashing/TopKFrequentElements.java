@@ -27,6 +27,7 @@ public class TopKFrequentElements {
         // Each bucket represents the frequency and inside we have an array list of which values have
         // that frequency
 
+        @SuppressWarnings("unchecked")
         ArrayList<Integer>[] frequencyBucket = new ArrayList[nums.length + 1];
 
         // Storing the values in their frequency bucket
