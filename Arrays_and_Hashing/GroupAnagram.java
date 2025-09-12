@@ -31,7 +31,7 @@ public class GroupAnagram {
 
             // It's a new word, give it it's own list
             } else {
-                mapOfAnagrams.put(characterFrequency, new ArrayList<String>());
+                mapOfAnagrams.put(characterFrequency, new ArrayList<>());
                 mapOfAnagrams.get(characterFrequency).add(word);
             }
         }
