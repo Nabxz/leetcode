@@ -1,76 +1,56 @@
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /*
-* Time Complexity: O()
-* Space Complexity: O()
+* Time Complexity: O(n^2)
+* Space Complexity: O(1)
  */
 class ThreeSum {
 
     public static List<List<Integer>> threeSum(int[] nums) {
 
+        int a = 0;
+        int b;
+        int c;
         List<List<Integer>> allThreeValuesThatAddToZeroWithNoDuplicates = new ArrayList<>();
-        int value1Index;
-        int value2Index;
-        int valueNeeded;
-        List<Integer> threeValuesThatAddToZero;
-        boolean valueFound;
-        boolean containsDuplicate;
 
-        // Check every 2 pairs of numbers for the third value that'd make the three add up to 0
-        for (int i = 0; i < nums.length - 1; i++) {
+        // Sorting input array
+        Arrays.sort(nums);
 
-            value1Index = i;
-            value2Index = i + 1;
-            valueNeeded = -(nums[value1Index]) - (nums[value2Index]);
-            threeValuesThatAddToZero = new ArrayList<>();
-            valueFound = false;
-            containsDuplicate = false;
+        while (a + 2 < nums.length) {
 
-            // For each needed value, check if it's in the array
-            for (int currIndex = 0; currIndex < nums.length && !valueFound; currIndex++) {
-                // If we are on the same value we are checking skip, those values can't be reused
-                if (currIndex == value1Index || currIndex == value2Index) {
-                    continue;
+            b = a + 1;
+            c = nums.length - 1;
+
+            while (b < c) {
+
+                if (nums[a] + nums[b] + nums[c] > 0) {
+                    // move c to the left and ignore duplicates
+                    do {
+                        c--;
+                    } while (c > 0 && nums[c] == nums[c + 1]);
+                } else if (nums[a] + nums[b] + nums[c] < 0) {
+                    // move b to the right and ignore duplicates
+                    do {
+                        b++;
+                    } while (b < nums.length && nums[b] == nums[b - 1]);
+                } else {
+                    // Adding the three numbers equals to zero
+                    List<Integer> threeValuesThatAddToZero = new ArrayList<>(Arrays.asList(nums[a], nums[b], nums[c]));
+                    allThreeValuesThatAddToZeroWithNoDuplicates.add(threeValuesThatAddToZero);
+                    do {
+                        b++;
+                    } while (b < nums.length && nums[b] == nums[b - 1]);
                 }
-
-                System.out.println("current: " + nums[currIndex] + ", needed: " + valueNeeded);
-                // If the value we need is in the array then add it to the list of values that add up to zero
-                if (nums[currIndex] == valueNeeded) {
-                    System.out.println("I was called");
-                    threeValuesThatAddToZero.add(nums[value1Index]);
-                    threeValuesThatAddToZero.add(nums[value2Index]);
-                    threeValuesThatAddToZero.add(nums[currIndex]);
-                    System.out.println(threeValuesThatAddToZero);
-                    valueFound = true;
-
-                    if (allThreeValuesThatAddToZeroWithNoDuplicates.isEmpty()) {
-                        allThreeValuesThatAddToZeroWithNoDuplicates.add(threeValuesThatAddToZero);
-                    } else {
-                        // If the values we found aren't duplicates (already in the list) then add them to the final list
-                        for (List<Integer> listInFinalList : allThreeValuesThatAddToZeroWithNoDuplicates) {
-                            System.out.println("--> " + listInFinalList);
-                            if (threeValuesThatAddToZero.get(0) != null
-                                    && listInFinalList.get(0) != null
-                                    && threeValuesThatAddToZero.get(0) == listInFinalList.get(0)
-                                    && threeValuesThatAddToZero.get(1) == listInFinalList.get(1)
-                                    && threeValuesThatAddToZero.get(2) == listInFinalList.get(2)) {
-                                System.out.println("is a duplicate");
-                                containsDuplicate = true;
-                            }
-
-                            if (!containsDuplicate) {
-                                System.out.println("i was added");
-                                allThreeValuesThatAddToZeroWithNoDuplicates.add(threeValuesThatAddToZero);
-                            }
-                        }
-                    }
-
-                }
-
             }
 
+            // Move to next a and ignore dusplicates
+            a++;
+            while (nums[a] == nums[a - 1] && a + 2 < nums.length) {
+                a++;
+            }
         }
 
         return allThreeValuesThatAddToZeroWithNoDuplicates;
@@ -80,6 +60,22 @@ class ThreeSum {
         List<List<Integer>> result = threeSum(new int[]{-1, 0, 1, 2, -1, -4});
         System.out.print("Test 1:\nExpected: [[-1,-1,2],[-1,0,1]]\nResult: [");
         for (List<Integer> list : result) {
+            System.out.print(list);
+            System.out.print(",");
+        }
+        System.out.print("]\n\n");
+
+        List<List<Integer>> result2 = threeSum(new int[]{-1, 0, 1, 2, -1, -4, -2, -3, 3, 0, 4});
+        System.out.print("Test 2:\nExpected: [[-4,0,4],[-4,1,3],[-3,-1,4],[-3,0,3],[-3,1,2],[-2,-1,3],[-2,0,2],[-1,-1,2],[-1,0,1]]\nResult: [");
+        for (List<Integer> list : result2) {
+            System.out.print(list);
+            System.out.print(",");
+        }
+        System.out.print("]\n\n");
+
+        List<List<Integer>> result3 = threeSum(new int[]{0, 0, 0});
+        System.out.print("Test 3:\nExpected: [[0,0,0]]\nResult: [");
+        for (List<Integer> list : result3) {
             System.out.print(list);
             System.out.print(",");
         }
