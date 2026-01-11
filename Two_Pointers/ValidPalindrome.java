@@ -1,10 +1,9 @@
-package Two_Pointers;
-
 /*
 * Time Complexity: O(n)
-* Space Complexity: O()
-*/
+* Space Complexity: O(1)
+ */
 public class ValidPalindrome {
+
     public static boolean isPalindrome(String s) {
         Boolean isValid = true;
         int top = 0;
@@ -17,7 +16,7 @@ public class ValidPalindrome {
                 tail--;
             }
 
-            if(Character.toLowerCase(s.charAt(top)) == Character.toLowerCase(s.charAt(tail))) {
+            if (Character.toLowerCase(s.charAt(top)) == Character.toLowerCase(s.charAt(tail))) {
                 top++;
                 tail--;
             } else {
