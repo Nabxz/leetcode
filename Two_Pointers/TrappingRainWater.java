@@ -1,4 +1,3 @@
-
 /*
 * Time Complexity: O(n)
 * Space Complexity: O(1)
@@ -6,30 +5,32 @@
 class TrappingRainWater {
 
     public static int trap(int[] height) {
-        int leftPtr = 0;
-        int rightPtr = 0;
         int totalTrappedWater = 0;
-        int possibleTrappedWater = 0;
+        int maxHeightSeenSoFar = 0;
+        int[] maxContainerHeightFromLeftSide = new int[height.length];
+        int[] maxContainerHeightFromRightSide = new int[height.length];
 
-        // Move left and right pointer to first non-zero height
-        while (leftPtr < height.length && height[leftPtr] == 0) {
-            leftPtr++;
-            rightPtr++;
+        // Find max container heights from left side
+        for (int i = 0; i < maxContainerHeightFromLeftSide.length; i++) {
+            if (height[i] > maxHeightSeenSoFar) {
+                maxHeightSeenSoFar = height[i];
+            }
+            maxContainerHeightFromLeftSide[i] = maxHeightSeenSoFar;
+        }
+
+        // Find max container heights from left side
+        maxHeightSeenSoFar = 0;
+        for (int i = maxContainerHeightFromRightSide.length - 1; i >= 0; i--) {
+            if (height[i] > maxHeightSeenSoFar) {
+                maxHeightSeenSoFar = height[i];
+            }
+            maxContainerHeightFromRightSide[i] = maxHeightSeenSoFar;
         }
 
         // Find trapped water
-        while (rightPtr < height.length - 1) {
-            rightPtr++;
-
-            // End of water container and possible start of a new container
-            if (height[rightPtr] >= height[leftPtr]) {
-                leftPtr = rightPtr;
-                totalTrappedWater += possibleTrappedWater;
-                possibleTrappedWater = 0;
-
-                // Still accumulating trapped water
-            } else {
-                possibleTrappedWater += height[leftPtr] - height[rightPtr];
+        for (int i = 0; i < height.length; i++) {
+            if (Math.min(maxContainerHeightFromLeftSide[i], maxContainerHeightFromRightSide[i]) - height[i] > 0) {
+                totalTrappedWater += Math.min(maxContainerHeightFromLeftSide[i], maxContainerHeightFromRightSide[i]) - height[i];
             }
         }
 
