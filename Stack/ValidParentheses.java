@@ -2,8 +2,8 @@
 import java.util.Stack;
 
 /*
-* Time Complexity: O( )
-* Space Complexity: O( )
+* Time Complexity: O(n)
+* Space Complexity: O(n)
  */
 public class ValidParentheses {
 
