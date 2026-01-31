@@ -26,27 +26,25 @@ public class ReversePolishNotation {
     }
 
     public static int evalRPN(String[] tokens) {
-        int totalValue = 0;
-        boolean firstExpression = true;
+        int totalValue;
 
-        for (String value : tokens) {
+        if (tokens.length == 1) {
+            totalValue = Integer.parseInt(tokens[0]);
 
-            if (value.equals("+") || value.equals("-") || value.equals("*") || value.equals("/")) {
+        } else {
+            for (String value : tokens) {
+                if (value.equals("+") || value.equals("-") || value.equals("*") || value.equals("/")) {
 
-                if (firstExpression & operationStack.size() >= 2) {
-                    firstExpression = false;
                     int operand2 = Integer.parseInt(operationStack.pop());
                     int operand1 = Integer.parseInt(operationStack.pop());
-                    totalValue = executeOperation(operand1, operand2, value);
-                } else if (!firstExpression & operationStack.size() >= 1) {
-                    totalValue = executeOperation(totalValue, Integer.parseInt(operationStack.pop()), value);
-                } else {
-                    // The equation is invalid, but i'm not accounting for that
-                }
-            } else {
-                operationStack.push(value);
-            }
+                    operationStack.push(String.valueOf(executeOperation(operand1, operand2, value)));
 
+                } else {
+                    operationStack.push(value);
+                }
+
+            }
+            totalValue = Integer.parseInt(operationStack.pop());
         }
 
         return totalValue;
@@ -54,7 +52,8 @@ public class ReversePolishNotation {
 
     public static void main(String[] args) {
         System.out.println("Test 1:\nExpected: 5\nResult: " + evalRPN(new String[]{"1", "2", "+", "3", "*", "4", "-"}));
-        System.out.println("Test 2:\nExpected: 6\nResult: " + evalRPN(new String[]{"4", "13", "5", "/", "+"}));
-        System.out.println("Test 3:\nExpected: 22\nResult: " + evalRPN(new String[]{"10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"}));
+        System.out.println("\nTest 2:\nExpected: 6\nResult: " + evalRPN(new String[]{"4", "13", "5", "/", "+"}));
+        System.out.println("\nTest 3:\nExpected: 22\nResult: " + evalRPN(new String[]{"10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"}));
+        System.out.println("\nTest 4:\nExpected: -7\nResult: " + evalRPN(new String[]{"4", "-2", "/", "2", "-3", "-", "-"}));
     }
 }
