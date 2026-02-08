@@ -1,16 +1,45 @@
 /*
-* Time Complexity: O()
-* Space Complexity: O()
+* Time Complexity: O(n)
+* Space Complexity: O(n)
  */
 
 import java.util.Stack;
 
 public class DailyTemperature {
 
-    static Stack<String> operationStack = new Stack<>();
+    private static class TemperatureReading{
+
+        int temperature;
+        int indexOfTemperature;
+
+        public TemperatureReading(int temperature, int indexOfTemperature) {
+            this.temperature = temperature;
+            this.indexOfTemperature = indexOfTemperature;
+        }
+        
+    }
 
     public static int[] dailyTemperatures(int[] temperatures) {
+        Stack<TemperatureReading> temperatureStack = new Stack<>();
         int[] results = new int[temperatures.length];
+
+        for (int i = 0; i < temperatures.length; i++) {
+
+            // Keep the stack in monotonic decreasing order
+            if (temperatureStack.isEmpty() || temperatures[i] <= temperatureStack.peek().temperature) {
+
+                temperatureStack.push(new TemperatureReading(temperatures[i], i));
+            
+            } else { // We found a bigger number, update results array
+
+                // Mantain monotonic order while computing results
+                while (!temperatureStack.isEmpty() && temperatures[i] > temperatureStack.peek().temperature) {
+                    TemperatureReading temperatureSolvedFor = temperatureStack.pop();
+                    results[temperatureSolvedFor.indexOfTemperature] = i - temperatureSolvedFor.indexOfTemperature;
+                }
+                temperatureStack.push(new TemperatureReading(temperatures[i], i));
+            }
+        }
 
         return results;
     }
