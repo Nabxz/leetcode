@@ -50,5 +50,6 @@ public class CarFleet {
     public static void main(String[] args) {
         System.out.println("Test 1:\nExpected: 1\nResult: " + carFleet(10, new int[] {1,4}, new int[] {3,2}));
         System.out.println("\nTest 2:\nExpected: 3\nResult: " + carFleet(10, new int[] {4, 1, 0, 7}, new int[] {2, 2, 1, 1}));
+        System.out.println("\nTest 3:\nExpected: 2\nResult: " + carFleet(10, new int[] {6,8}, new int[] {3,2}));
     }
 }
