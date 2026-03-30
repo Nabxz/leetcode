@@ -2,8 +2,8 @@ import java.util.Arrays;
 import java.util.Stack;
 
 /*
-* Time Complexity: O( )
-* Space Complexity: O( )
+* Time Complexity: O(nlogn)
+* Space Complexity: O(n)
  */
 public class CarFleet {
 
@@ -21,27 +21,25 @@ public class CarFleet {
         for (int i = 0; i < position.length; i++) {
             listOfCars[i] = new Car(position[i], speed[i]);
         }
+
         Arrays.sort(listOfCars);
 
         // Add last car as a fleet
         Stack<Car> carFleet = new Stack<>();
         carFleet.push(listOfCars[listOfCars.length - 1]);
-        int lastSeenCarFleetIndex = listOfCars.length - 1;
 
         for (int i = listOfCars.length - 2; i >= 0; i--) {
+
+            // Calculate when both cars get to target
+            float car1ArrivalTime = (float) (target - carFleet.peek().carPosition) / carFleet.peek().carSpeed;
+            float car2ArrivalTime = (float) (target - listOfCars[i].carPosition) / listOfCars[i].carSpeed;
 
             // Add the new car as a fleet
             carFleet.push(listOfCars[i]);
 
-            // Calculate when both cars get to target
-            int car1ArrivalTime = (target - listOfCars[lastSeenCarFleetIndex].carPosition) / listOfCars[lastSeenCarFleetIndex].carSpeed;
-            int car2ArrivalTime = (target - listOfCars[i].carPosition) / listOfCars[i].carSpeed;
-
             if (car2ArrivalTime <= car1ArrivalTime) {
                 carFleet.pop();
-            } else {
-                lastSeenCarFleetIndex = i;
-            }
+            } 
         }
 
         return carFleet.size();
