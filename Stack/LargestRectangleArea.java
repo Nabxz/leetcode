@@ -49,6 +49,6 @@ public class LargestRectangleArea {
 
     public static void main(String[] args) {
         System.out.println("Test 1:\nExpected: 8\nResult: " + largestRectangleArea(new int[] { 7, 1, 7, 2, 2, 4 }));
-        System.out.println("Test 2:\nExpected: 1\nResult: " + largestRectangleArea(new int[] { 1, 3, 7 }));
+        System.out.println("Test 2:\nExpected: 7\nResult: " + largestRectangleArea(new int[] { 1, 3, 7 }));
     }
 }
