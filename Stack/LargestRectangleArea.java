@@ -1,6 +1,6 @@
 /*
-* Time Complexity: O()
-* Space Complexity: O()
+* Time Complexity: O(n)
+* Space Complexity: O(n)
  */
 
 import java.util.Stack;
