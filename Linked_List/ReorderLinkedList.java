@@ -26,8 +26,8 @@ public class ReorderLinkedList {
 
             // Now we reverse the list
             ListNode next;
-            ListNode newTail = slow;
             if (slow != null) {
+                ListNode newTail = slow;
                 next = slow.next;
                 while (next != null) {
                     temp = slow;
@@ -35,8 +35,8 @@ public class ReorderLinkedList {
                     next = slow.next;
                     slow.next = temp;
                 }
+                newTail.next = null;
             }
-            newTail.next = null;
 
             // Halft the list has been reversed, now build the new one
             // Slow is at the start of the reversed half
