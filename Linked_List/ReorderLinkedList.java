@@ -1,3 +1,4 @@
+
 /*
 * Time Complexity: O()
 * Space Complexity: O()
@@ -5,6 +6,47 @@
 public class ReorderLinkedList {
     public void reorderList(ListNode head) {
 
+        ListNode slow = head;
+        ListNode fast = head;
+
+        // Reverse half the list
+        if (fast != null) {
+            fast = fast.next;
+
+            while (fast != null && fast.next != null) {
+                slow = slow.next;
+                fast = fast.next.next;
+            }
+
+            // Slow pointer is now at the middle so we start reversing the list
+            // First we disconnect the 2 lists
+            ListNode temp = slow;
+            slow = slow.next;
+            temp.next = null;
+
+            // Now we reverse the list
+            ListNode next;
+            while (slow != null && slow.next != null) {
+                next = slow.next;
+                temp = slow;
+                slow = next;
+                slow.next = temp;
+            }
+
+            // Halft the list has been reversed, now build the new one
+            // Slow is at the start of the reversed half
+            ListNode curr = head;
+            ListNode currNext;
+            ListNode slowNext;
+            while (curr != null && slow != null) {
+                currNext = curr.next;
+                slowNext = slow.next;
+                curr.next = slow;
+                slow.next = currNext;
+                curr = currNext;
+                slow = slowNext;
+            }
+        }
     }
 }
 
