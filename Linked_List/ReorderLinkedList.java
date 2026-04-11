@@ -1,7 +1,7 @@
 
 /*
-* Time Complexity: O()
-* Space Complexity: O()
+* Time Complexity: O(n)
+* Space Complexity: O(1)
  */
 public class ReorderLinkedList {
     public void reorderList(ListNode head) {
