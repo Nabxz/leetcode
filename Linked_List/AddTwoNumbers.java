@@ -1,22 +1,22 @@
 /*
-* Time Complexity: O()
-* Space Complexity: O()
+* Time Complexity: O(m + n), where m is the length of list l1 and n is the length of list l2
+* Space Complexity: O(1)
  */
 public class AddTwoNumbers {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode result = null;
         ListNode resultHead = null;
 
-        // Reverse both lists
-        l1 = reverseList(l1);
-        l2 = reverseList(l2);
         ListNode currValOne = l1;
         ListNode currValTwo = l2;
 
         int carryOver = 0;
-        int operand1 = 0;
-        int operand2 = 0;
+        int operand1;
+        int operand2;
         while (currValOne != null || currValTwo != null) {
+
+            operand1 = 0;
+            operand2 = 0;
 
             // If we still have operand 1
             if (currValOne != null) {
@@ -43,26 +43,14 @@ public class AddTwoNumbers {
             carryOver = (operand1 + operand2 + carryOver) / 10;
         }
 
-        resultHead = reverseList(resultHead);
-        return resultHead;
-    }
-
-    private ListNode reverseList(ListNode head) {
-        ListNode curr = head;
-        ListNode next = curr.next;
-        ListNode prev = null;
-
-        while (next != null) {
-            prev = curr;
-            curr = next;
-            next = next.next;
-
-            // Reverse link
-            curr.next = prev;
+        // If we finish with a carryover
+        if (result != null && carryOver > 0) {
+            result.next = new ListNode();
+            result = result.next;
+            result.val = carryOver;
         }
 
-        head.next = null;
-        return curr;
+        return resultHead;
     }
 }
 
