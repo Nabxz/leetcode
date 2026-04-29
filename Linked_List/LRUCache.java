@@ -1,5 +1,10 @@
 import java.util.HashMap;
 
+/*
+* Time Complexity: O(n)
+* Space Complexity: O(n)
+* Where n is the capacity (maximum number of entries) of the cache.
+ */
 class LRUCache {
 
     private class CacheEntry {
