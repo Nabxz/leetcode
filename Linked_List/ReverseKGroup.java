@@ -1,6 +1,6 @@
 /*
-* Time Complexity: O()
-* Space Complexity: O()
+ * Time Complexity: O(n)
+ * Space Complexity: O(1)
  */
 class ReverseKGroup {
     public ListNode reverseKGroup(ListNode head, int k) {
@@ -19,7 +19,8 @@ class ReverseKGroup {
         int nodeCount;
         ListNode curr;
 
-        while (!doneReversingWholeList) {
+        // If k is 1 or less there's nothing to reverse
+        while (!doneReversingWholeList && k > 1) {
 
             nodeCount = 0;
             curr = firstNodeInGroupToReverse;
